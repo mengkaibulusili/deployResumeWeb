@@ -1,0 +1,4 @@
+FROM alpine
+COPY mysqldata/lib/mysql  /var/lib/mysql
+VOLUME /var/lib/mysql
+CMD ["/bin/bash"]

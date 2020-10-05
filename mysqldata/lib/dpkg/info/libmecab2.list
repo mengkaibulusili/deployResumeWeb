@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/libmecab.so.2.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libmecab2
+/usr/share/doc/libmecab2/changelog.Debian.gz
+/usr/share/doc/libmecab2/copyright
+/usr/share/doc/libmecab2/README
+/usr/share/doc/libmecab2/AUTHORS
+/etc
+/etc/mecabrc
+/usr/lib/libmecab.so.2

@@ -1,6 +1,7 @@
 FROM alpine
-COPY myServer /root/myServer
+COPY myServer /var/www/myServer
+COPY myapp /var/www/myapp
 
-VOLUME /root/myServer
+VOLUME /var/www/
 
 CMD ["/bin/bash"]

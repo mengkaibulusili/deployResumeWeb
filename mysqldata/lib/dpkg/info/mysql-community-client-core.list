@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/mysql-community-client-core
+/usr/share/doc/mysql-community-client-core/changelog.Debian.gz
+/usr/share/doc/mysql-community-client-core/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/mysql.1.gz
+/usr/share/man/man1/mysqlpump.1.gz
+/usr/share/man/man1/mysqldump.1.gz
+/usr/bin
+/usr/bin/mysql
+/usr/bin/mysqlpump
+/usr/bin/mysqldump

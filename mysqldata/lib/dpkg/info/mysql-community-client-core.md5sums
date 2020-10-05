@@ -1,0 +1,8 @@
+f06f5df11eed1aee9dbba923621f337e  usr/bin/mysql
+60b8a1af4611e9af2f78af3f3bb18f4c  usr/bin/mysqldump
+1af9bb1efbc0c47d9c8a722d34d5159a  usr/bin/mysqlpump
+8b675bb0d6bf4299a72c61548dc77be7  usr/share/doc/mysql-community-client-core/changelog.Debian.gz
+a0ead909f07e7b43620afe1d70ef5080  usr/share/doc/mysql-community-client-core/copyright
+ba038947f2bfae823e47c96b91d2c5ca  usr/share/man/man1/mysql.1.gz
+f5043a1d7bc1876cfe3b58261e4709dd  usr/share/man/man1/mysqldump.1.gz
+fd7dbfb99e91a5465afb5bb0df3c9bee  usr/share/man/man1/mysqlpump.1.gz
