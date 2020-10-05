@@ -1,0 +1,3 @@
+FROM registry.cn-hangzhou.aliyuncs.com/mkmk/centos:Py36Nginx
+
+CMD ["/bin/bash","/root/myServer/startServer.sh"]

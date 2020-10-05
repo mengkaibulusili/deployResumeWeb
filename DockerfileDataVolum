@@ -1,0 +1,6 @@
+FROM alpine
+COPY myServer /root/myServer
+
+VOLUME /root/myServer
+
+CMD ["/bin/bash"]
