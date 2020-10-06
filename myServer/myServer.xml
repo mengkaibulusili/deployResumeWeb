@@ -2,6 +2,7 @@
    <socket>127.0.0.1:8999</socket> <!-- 内部端口，自定义 --> 
    <chdir>/var/www/myServer/</chdir> <!-- 项目路径 -->            
    <module>myServer.wsgi</module>  <!-- shopServer为wsgi.py所在目录名--> 
-   <processes>2</processes> <!-- 进程数 -->     
+   <processes>16</processes> <!-- 进程数 -->
+   <buffer-size>65536</buffer-size>
    <daemonize>uwsgi.log</daemonize> <!-- 日志文件 -->
 </uwsgi>

@@ -26,15 +26,18 @@ class ResumeInfo(models.Model):
   resume_highest_degree = models.CharField(default="", blank=True, max_length=charlen)
   resume_location = models.CharField(default="", blank=True, max_length=charlen)
   resume_late_major = models.CharField(default="", blank=True, max_length=charlen)
+
   resume_expected_arrival_time = models.CharField(default="", blank=True, max_length=charlen)
-  resume_skill = models.CharField(default="", blank=True, max_length=charlen)
-  resume_award = models.CharField(default="", blank=True, max_length=charlen)
   resume_graduation_date = models.CharField(default="", blank=True, max_length=charlen)
   resume_birthday = models.CharField(default="", blank=True, max_length=charlen)
-  resume_project_experience = models.CharField(default="", blank=True, max_length=charlen)
-  resume_self_description = models.CharField(default="", blank=True, max_length=charlen)
-  resume_internship = models.CharField(default="", blank=True, max_length=charlen)
-  resume_job_intension = models.CharField(default="", blank=True, max_length=charlen)
+
+  resume_skill = models.CharField(default="", blank=True, max_length=longercharlen)
+  resume_award = models.CharField(default="", blank=True, max_length=longercharlen)
+
+  resume_project_experience = models.CharField(default="", blank=True, max_length=longercharlen)
+  resume_self_description = models.CharField(default="", blank=True, max_length=longercharlen)
+  resume_internship = models.CharField(default="", blank=True, max_length=longercharlen)
+  resume_job_intension = models.CharField(default="", blank=True, max_length=longercharlen)
 
 
 # 应聘者 和 招聘任务的关系表

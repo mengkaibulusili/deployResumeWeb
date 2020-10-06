@@ -16,6 +16,8 @@ docker create --name djangoVolume registry.cn-hangzhou.aliyuncs.com/mkmk/data_vo
 
 docker run -d --name resumeServer --net resumeweb --ip 192.168.200.201 -p 15000:5000 --volumes-from djangoVolume --privileged=true registry.cn-hangzhou.aliyuncs.com/mkmk/centos:resumeServer
 
+docker run -d --name resumeServer --net resumeweb --ip 192.168.200.201 -p 80:5000 --volumes-from djangoVolume --privileged=true registry.cn-hangzhou.aliyuncs.com/mkmk/centos:resumeServer
+
 # 查看启动日志
 
 docker logs resumeServer

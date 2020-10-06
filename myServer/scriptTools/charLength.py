@@ -1,2 +1,2 @@
-charlen = 200
-longercharlen = 1000
+charlen = 254
+longercharlen = 2000
