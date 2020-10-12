@@ -9,7 +9,7 @@ from jobApp.models import JobInfo
 from scriptTools.dealCsv import dealCsvFile
 from django.core import serializers
 from django.core.paginator import Paginator
-from scriptTools.dealUploadFiles import dealUploadFile, dealResumeDir, getResumeFileNameByUuid
+from scriptTools.dealUploadFiles import dealUploadFile, dealResumeDir, getResumeFileNameByUuid, dealHeadImgDir, dealUploadHeadImg, getHeadimgNameByUuid
 
 from django.db import transaction
 
@@ -19,6 +19,7 @@ def usefucbyname(request, fucname):
   return eval(fucname)(request)
 
 
+# http://localhost:15000/api/userApp/hello/
 @mydecorator.httpData
 def hello(request):
   return "hello kiki !"
@@ -77,7 +78,13 @@ def getUserInfoByUuid(request):
 @mydecorator.httpData
 def getResumeFileName(request):
   data_dict = json.loads(request.GET.get("data"))
-  return {"resume_file_name": getResumeFileNameByUuid(data_dict["user_uuid"])}
+  return {"file_name": getResumeFileNameByUuid(data_dict["user_uuid"])}
+
+
+@mydecorator.httpData
+def getHeadimgName(request):
+  data_dict = json.loads(request.GET.get("data"))
+  return {"file_name": getHeadimgNameByUuid(data_dict["user_uuid"])}
 
 
 # http://localhost:8000/api/userApp/deliverJob/?data={"user_uuid":"null","job_uuid":"12122"}
@@ -124,10 +131,25 @@ def uploadResumeFile(request):
   postDict = dict(request.POST)
   data = {x: postDict[x][0] for x in postDict.keys()}
 
-  resume_file_name = data["resume_file_name"] if data.__contains__("resume_file_name") else ""
-  if resume_file_name != "":
+  file_name = data["file_name"] if data.__contains__("file_name") else ""
+  if file_name != "":
     dealResumeDir(data["user_uuid"])
-    dealUploadFile(data["user_uuid"], resume_file_name, sFile)
+    dealUploadFile(data["user_uuid"], file_name, sFile)
+  else:
+    raise (Exception("upload fail"))
+
+
+@mydecorator.httpRes
+def uploadHeadimg(request):
+  # <QueryDict: {'modelname': ['a'], 'filesize': ['218 B']}>
+  sFile = request.FILES.get('file')
+  postDict = dict(request.POST)
+  data = {x: postDict[x][0] for x in postDict.keys()}
+
+  file_name = data["file_name"] if data.__contains__("file_name") else ""
+  if file_name != "":
+    dealHeadImgDir(data["user_uuid"])
+    dealUploadHeadImg(data["user_uuid"], file_name, sFile)
   else:
     raise (Exception("upload fail"))
 
