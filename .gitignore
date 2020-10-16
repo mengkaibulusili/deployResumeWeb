@@ -1,0 +1,12 @@
+mysqldata/*
+myapp/*
+**/__pycache__/*
+**/storeFiles/*
+**/*.pyc
+**/local_*
+**/db.sqlite3
+**/*initial.py
+**/myServer/downloadFiles/*
+**/.idea/*
+**/.vscode/*
+
