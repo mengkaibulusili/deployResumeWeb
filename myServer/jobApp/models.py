@@ -17,6 +17,7 @@ class JobInfo(models.Model):
   job_demand = models.CharField(default="", blank=True, max_length=longercharlen)
   company_tele = models.CharField(default="", blank=True, max_length=charlen)
   company_email = models.CharField(default="", blank=True, max_length=charlen)
+  company_contact_name = models.CharField(default="", blank=True, max_length=charlen)
   job_uuid = models.CharField(default="", blank=True, max_length=charlen)
   job_create_time = models.CharField(default=tTools.dateStdTime, max_length=charlen, blank=True)
   job_end_time = models.CharField(default="", blank=True, max_length=charlen)

@@ -6,6 +6,7 @@ import scriptTools.myZip as myZip
 import scriptTools.fieldsMap as fieldsMap
 from django.core import serializers
 from django.utils.encoding import escape_uri_path
+from django.forms.models import model_to_dict
 
 import json
 import uuid
@@ -60,25 +61,52 @@ def getCandidateInfo(request):
   data_dict = json.loads(request.GET.get("data"))
   page_index = int(data_dict["page_index"])
   job_id = data_dict["query_job_id"]
+  job_name = data_dict["query_job_name"]
   deliver_status = data_dict["deliver_status"]
   all_delivers = []
   if job_id != "":
     query_res = JobInfo.objects.filter(job_id=job_id)
     if query_res:
       job_uuid = query_res[0].job_uuid
-      all_delivers = UserJobInfo.objects.filter(job_uuid=job_uuid, deliver_status__contains=deliver_status)
-
+      all_delivers = UserJobInfo.objects.filter(job_uuid=job_uuid, deliver_status__icontains=deliver_status)
+  elif job_name != "":
+    query_res = JobInfo.objects.filter(job_name__icontains=job_name)
+    if query_res:
+      job_uuid = query_res[0].job_uuid
+      all_delivers = UserJobInfo.objects.filter(job_uuid=job_uuid, deliver_status__icontains=deliver_status)
   else:
-    all_delivers = UserJobInfo.objects.filter(deliver_status__contains=deliver_status)
-  all_user_uuid = [x.user_uuid for x in all_delivers]
-  all_candidates = ResumeInfo.objects.filter(user_uuid__in=all_user_uuid)
+    all_delivers = UserJobInfo.objects.filter(deliver_status__icontains=deliver_status)
 
   eachcount = 10
-  paginator = Paginator(all_candidates, eachcount)
+  paginator = Paginator(all_delivers, eachcount)
   #获取传入页码的当前页的要显示的所有人
-  candidates = paginator.page(page_index)
+  delivers = paginator.page(page_index)
+
+  def get_one_deliver_info(x):
+    resume_info = model_to_dict(ResumeInfo.objects.get(user_uuid=x.user_uuid))
+    resume_info["job_uuid"] = x.job_uuid
+    resume_info["job_name"] = JobInfo.objects.get(job_uuid=x.job_uuid).job_name
+    return {"fields": resume_info}
+
+  candidates_list = [get_one_deliver_info(x) for x in delivers]
   #返回序列化的当前页所用用户的数据
-  return {"lists": json.loads(serializers.serialize("json", candidates)), "sum_page": paginator.num_pages}
+  #  {"lists": [{"model": "userApp.resumeinfo", "pk": 1, "fields": {"user_uuid": "964146c60b
+  return {"lists": candidates_list, "sum_page": paginator.num_pages}
+
+
+# http://127.0.0.1:8000/api/adminApp/delOneDeliverInfo/?data={"job_uuid": "1","user_uuid":"1"}
+@mydecorator.httpRes
+def delOneDeliverInfo(request):
+  data_dict = json.loads(request.GET.get("data"))
+  job_uuid = data_dict["job_uuid"]
+  user_uuid = data_dict["user_uuid"]
+  UserJobInfo.objects.filter(job_uuid=job_uuid, user_uuid=user_uuid).delete()
+
+
+# http://127.0.0.1:8000/api/adminApp/delAllDeliverInfo/?
+@mydecorator.httpRes
+def delAllDeliverInfo(request):
+  UserJobInfo.objects.all().delete()
 
 
 # http://127.0.0.1:8000/api/adminApp/outputAllResumeInfo/

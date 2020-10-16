@@ -111,8 +111,7 @@ def getDeliverStatus(request):
 @mydecorator.httpRes
 def setDeliverStatus(request):
   data_dict = json.loads(request.GET.get("data"))
-  job_id = data_dict["job_id"]
-  job_uuid = JobInfo.objects.get(job_id=job_id).job_uuid
+  job_uuid = data_dict["job_uuid"]
   select_res = UserJobInfo.objects.filter(
     user_uuid=data_dict["user_uuid"],
     job_uuid=job_uuid,

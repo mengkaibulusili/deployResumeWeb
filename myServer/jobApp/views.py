@@ -76,6 +76,7 @@ def selectJobInfoByOptions(request):
     job_status__contains=d_["job_status"],
     min_salary__gte=int(d_["min_salary"]),
     max_salary__lte=int(d_["max_salary"]),
+    company_name__contains=d_["company_name"],
   ).order_by("-job_create_time")
   #每页的人数
   eachcount = 10
