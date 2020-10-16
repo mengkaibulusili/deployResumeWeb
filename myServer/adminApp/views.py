@@ -163,7 +163,7 @@ def outputAllResumeInfo(request):
       res_list.append(fields_value)
       query_index += 1
     res_str = "\n".join([",".join(y) for y in res_list])
-    with open(csv_file_path, "w", encoding="utf8") as f:
+    with open(csv_file_path, "w", encoding="gbk") as f:
       f.write(res_str)
     with ZipFile(downloadFilePath, "a") as myzip:
       myzip.write(csv_file_path, csvfilename)
